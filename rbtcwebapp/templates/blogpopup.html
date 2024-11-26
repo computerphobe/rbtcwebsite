@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Popup Example</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+  <div class="flex justify-center items-center min-h-screen">
+    <!-- Card -->
+    <div class="card relative w-64 h-40 bg-white shadow-md rounded-lg cursor-pointer" onclick="openModal('card1')">
+      <div class="p-4">
+        <h3 class="text-lg font-bold">Card Title</h3>
+        <p class="text-sm text-gray-500">Click to see more details</p>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="card1-modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+      <div class="bg-white w-11/12 max-w-md rounded-lg shadow-lg">
+        <div class="p-4">
+          <h3 class="text-lg font-bold">Card Title</h3>
+          <p class="text-sm text-gray-700 max-h-40 overflow-y-auto">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel lectus ac lorem accumsan
+            interdum. Donec a efficitur ex, ut hendrerit justo. Aenean vehicula nisi ac facilisis feugiat.
+            Mauris tempor diam sit amet metus euismod, nec vulputate nisl eleifend. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Vivamus eget risus fringilla, viverra urna nec, cursus sapien.
+          </p>
+        </div>
+        <div class="flex justify-end p-4 border-t">
+          <button onclick="closeModal('card1')" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded hover:bg-red-600">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById(`${id}-modal`);
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(`${id}-modal`);
+      modal.classList.add('hidden');
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Issued Components</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col" style="background-color: black;">
+
+    <!-- Header -->
+    <header class="bg-black text-white p-6 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">My Issued Components</h1>
+            <a href="{% url 'components' %}" class="bg-white text-blue-600 py-2 px-4 rounded-lg shadow hover:bg-gray-200 transition">
+                Browse Components
+            </a>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="container mx-auto mt-8 p-6 flex-grow space-y-8">
+
+        <!-- Pending Requests Section -->
+        <section class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-yellow-600 mb-4">Pending Requests</h2>
+            {% if pending_components %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600 border border-gray-300 rounded-lg">
+                        <thead class="bg-yellow-500 text-white uppercase text-sm">
+                            <tr>
+                                <th class="py-3 px-6">Component</th>
+                                <th class="py-3 px-6">Quantity</th>
+                                <th class="py-3 px-6">Request Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            {% for pending in pending_components %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-4 px-6 font-medium text-gray-800">{{ pending.component.name }}</td>
+                                    <td class="py-4 px-6">{{ pending.quantity }}</td>
+                                    <td class="py-4 px-6">{{ pending.issue_date|date:"d M Y" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-500 italic mb-6">You have no pending requests.</p>
+            {% endif %}
+        </section>
+
+        <!-- Rejected Requests Section -->
+        <section class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-red-600 mb-4">Rejected Requests</h2>
+            {% if rejected_components %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600 border border-gray-300 rounded-lg">
+                        <thead class="bg-red-500 text-white uppercase text-sm">
+                            <tr>
+                                <th class="py-3 px-6">Component</th>
+                                <th class="py-3 px-6">Quantity</th>
+                                <th class="py-3 px-6">Request Date</th>
+                                <th class="py-3 px-6">Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            {% for rejected in rejected_components %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-4 px-6 font-medium text-gray-800">{{ rejected.component.name }}</td>
+                                    <td class="py-4 px-6">{{ rejected.quantity }}</td>
+                                    <td class="py-4 px-6">{{ rejected.issue_date|date:"d M Y" }}</td>
+                                    <td class="py-4 px-6 italic text-gray-500">Request rejected by admin</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-500 italic mb-6">You have no rejected requests.</p>
+            {% endif %}
+        </section>
+
+        <!-- Issued Components Section -->
+        <section class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-blue-600 mb-4">Issued Components</h2>
+            {% if issued_components %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600 border border-gray-300 rounded-lg">
+                        <thead class="bg-blue-600 text-white uppercase text-sm">
+                            <tr>
+                                <th class="py-3 px-6">Component</th>
+                                <th class="py-3 px-6">Issue Date</th>
+                                <th class="py-3 px-6">Return Date</th>
+                                <th class="py-3 px-6">Returned</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            {% for issued_component in issued_components %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-4 px-6 font-medium text-gray-800">{{ issued_component.component.name }}</td>
+                                    <td class="py-4 px-6">{{ issued_component.issue_date|date:"d M Y" }}</td>
+                                    <td class="py-4 px-6">
+                                        {% if issued_component.return_date %}
+                                            {{ issued_component.return_date|date:"d M Y" }}
+                                        {% else %}
+                                            <span class="italic text-gray-400">Not returned</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {% if issued_component.return_date %}
+                                            <span class="text-green-600 font-semibold">Yes</span>
+                                        {% else %}
+                                            <span class="text-red-600 font-semibold">No</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-500 italic">No components have been issued to you yet.</p>
+            {% endif %}
+        </section>
+
+        <!-- Returned Components Section -->
+        <section class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-green-600 mb-4">Returned Components</h2>
+            {% if returned_components %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600 border border-gray-300 rounded-lg">
+                        <thead class="bg-green-500 text-white uppercase text-sm">
+                            <tr>
+                                <th class="py-3 px-6">Component</th>
+                                <th class="py-3 px-6">Quantity</th>
+                                <th class="py-3 px-6">Issue Date</th>
+                                <th class="py-3 px-6">Return Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            {% for returned in returned_components %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-4 px-6 font-medium text-gray-800">{{ returned.component.name }}</td>
+                                    <td class="py-4 px-6">{{ returned.quantity }}</td>
+                                    <td class="py-4 px-6">{{ returned.issue_date|date:"d M Y" }}</td>
+                                    <td class="py-4 px-6">{{ returned.return_date|date:"d M Y" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-500 italic">No returned components found.</p>
+            {% endif %}
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white text-center py-4">
+        <p class="text-sm">&copy; 2024 Robotics Lab. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

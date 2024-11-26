@@ -1,0 +1,49 @@
+Category,Component
+Drones,NRF With Antenna
+Drones,RF Transceiver
+Drones,GPS Module
+IoT,Bluetooth Module
+IoT,NodeMCU Shield
+IoT,WiFi Module
+IoT,Raspberry Pi (Nano)
+IoT,Jetson Nano
+IoT,Arduino Nano
+Sensors,Accelerometer
+Sensors,Ultrasonic Sensor
+Sensors,Gas Sensor
+Sensors,PIR Sensor (Passive Infrared)
+Sensors,DHT Sensor (DHT11/DHT22)
+Sensors,IR Sensor (Infrared)
+Sensors,LDR Sensor (Light Dependent Resistor)
+Sensors,Touch Sensor
+Sensors,Soil Moisture Sensor
+Sensors,Range Sensor
+Sensors,Pulse Sensor
+Sensors,Finger Sensor
+Sensors,Flag Sensor
+Sensors,Microphone Sensor
+Sensors,Turbidity Sensor
+Sensors,pH Module
+Sensors,ECG Sensor
+Actuators,Relay (4 Channel)
+Actuators,Servo Motor (Mini)
+Actuators,Servo Motor (Mega)
+Actuators,Servo Driver
+Actuators,Motor Driver (L293N)
+Actuators,N20 Motor
+Actuators,DC Fans
+Actuators,Servo Driver (8 Channel)
+Power & Battery,Battery Adapter
+Other,Transceiver
+Other,USB
+Other,Traffic Lights Module
+Other,Joystick
+Other,Knock Sensor Module
+Other,LCD (16x2)
+Other,I2C (Inter-Integrated Circuit)
+Other,OLED Display
+Other,Laser Module
+Other,Potentiometer
+Miscellaneous,Micro HDMI Cable
+Miscellaneous,USB - B Cable
+Miscellaneous,Arduino Nano Cable

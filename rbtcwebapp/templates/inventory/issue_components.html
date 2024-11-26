@@ -1,0 +1,13 @@
+<h2>Request Component</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit Request</button>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+<a href="{% url 'my_issued_components' %}">View My Issued Components</a>
